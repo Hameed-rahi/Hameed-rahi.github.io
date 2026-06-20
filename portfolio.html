@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="RAVIX Portfolio — 8+ proven AI automation projects by Hameed Rahi. Real estate AI agents, WhatsApp automation, social media automation and more."/>
+  <title>RAVIX Portfolio — Proven AI Automation Projects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:  #0A0F1E; --navy2: #111827; --navy3: #1a2235;
+      --blue:  #2563EB; --blue2: #3B82F6; --cyan:  #06B6D4;
+      --white: #F8FAFC; --grey:  #94A3B8; --grey2: #64748B;
+      --card:  #141C2E; --border: rgba(37,99,235,0.18); --glow: rgba(37,99,235,0.25);
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body:    'Inter', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--white); font-family: var(--font-body); line-height: 1.6; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy2); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 6%;
+      background: rgba(10,15,30,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+      color: var(--white); text-decoration: none; letter-spacing: 2px;
+    }
+    .nav-logo span { color: var(--blue2); }
+    .nav-back {
+      background: var(--card); color: var(--grey); border: 1px solid var(--border);
+      padding: .5rem 1.2rem; border-radius: 6px; text-decoration: none;
+      font-size: .9rem; transition: all .2s;
+    }
+    .nav-back:hover { border-color: var(--blue2); color: var(--blue2); }
+
+    /* HERO */
+    .portfolio-hero {
+      padding: 8rem 6% 4rem;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(37,99,235,.1) 0%, transparent 70%);
+      text-align: center;
+    }
+    .section-label {
+      display: inline-block; color: var(--blue2);
+      font-size: .78rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: .8rem;
+    }
+    .portfolio-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700; margin-bottom: 1rem;
+    }
+    .portfolio-title span { color: var(--blue2); }
+    .portfolio-desc { color: var(--grey); max-width: 580px; margin: 0 auto 2rem; line-height: 1.8; }
+    .filter-tabs { display: flex; gap: .8rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+    .filter-tab {
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--grey); padding: .5rem 1.2rem; border-radius: 100px;
+      cursor: pointer; font-size: .88rem; transition: all .2s; font-family: var(--font-body);
+    }
+    .filter-tab:hover, .filter-tab.active { background: var(--blue); border-color: var(--blue); color: var(--white); }
+
+    /* GRID */
+    .portfolio-section { padding: 2rem 6% 5rem; }
+    .portfolio-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden; transition: all .3s;
+    }
+    .project-card:hover { border-color: var(--blue2); transform: translateY(-5px); box-shadow: 0 16px 40px var(--glow); }
+    .project-thumb {
+      height: 180px; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .thumb-n8n { background: linear-gradient(135deg, #1a2235, #0d1520); }
+    .thumb-make { background: linear-gradient(135deg, #1a1535, #0d0a20); }
+    .thumb-zapier { background: linear-gradient(135deg, #1a1a20, #0d1015); }
+    .thumb-openai { background: linear-gradient(135deg, #0d1a20, #071015); }
+    .project-thumb::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(37,99,235,.15), rgba(6,182,212,.1));
+    }
+    .project-thumb-label {
+      position: absolute; top: 12px; right: 12px; z-index: 1;
+      background: rgba(37,99,235,.9); color: var(--white);
+      font-size: .72rem; font-weight: 700; padding: .25rem .7rem;
+      border-radius: 100px; letter-spacing: .5px;
+    }
+    .project-body { padding: 1.6rem; }
+    .project-title {
+      font-family: var(--font-display); font-size: 1.1rem;
+      font-weight: 600; margin-bottom: .5rem;
+    }
+    .project-desc { color: var(--grey); font-size: .9rem; line-height: 1.7; margin-bottom: 1rem; }
+    .project-features { list-style: none; margin-bottom: 1.2rem; display: flex; flex-direction: column; gap: .4rem; }
+    .project-features li { display: flex; align-items: flex-start; gap: .6rem; color: var(--grey); font-size: .84rem; }
+    .project-features li::before { content: '✓'; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
+    .project-tools { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .tool-tag {
+      background: rgba(37,99,235,.1); border: 1px solid var(--border);
+      color: var(--blue2); font-size: .72rem; padding: .2rem .7rem;
+      border-radius: 100px; font-weight: 500;
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem; padding: 2rem 6%; background: var(--navy2);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      margin-bottom: 0; text-align: center;
+    }
+    .stat-item .stat-num {
+      font-family: var(--font-display); font-size: 2rem;
+      font-weight: 700; color: var(--blue2); display: block;
+    }
+    .stat-item .stat-label { font-size: .78rem; color: var(--grey); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* CTA */
+    .portfolio-cta {
+      text-align: center; padding: 4rem 6%;
+      background: var(--navy2);
+    }
+    .cta-title {
+      font-family: var(--font-display); font-size: 2rem;
+      font-weight: 700; margin-bottom: 1rem;
+    }
+    .cta-title span { color: var(--blue2); }
+    .cta-desc { color: var(--grey); margin-bottom: 2rem; }
+    .btn-primary {
+      background: var(--blue); color: var(--white);
+      padding: .85rem 2rem; border-radius: 8px;
+      text-decoration: none; font-weight: 600; font-size: 1rem;
+      transition: all .25s; display: inline-flex; align-items: center; gap: .5rem;
+    }
+    .btn-primary:hover { background: var(--blue2); transform: translateY(-2px); box-shadow: 0 8px 24px var(--glow); }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy); border-top: 1px solid var(--border);
+      padding: 2rem 6%; text-align: center;
+    }
+    .footer-logo { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; letter-spacing: 2px; }
+    .footer-logo span { color: var(--blue2); }
+    .footer-copy { color: var(--grey2); font-size: .8rem; margin-top: .5rem; }
+
+    @media (max-width: 768px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">RAV<span>IX</span></a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<!-- HERO -->
+<div class="portfolio-hero">
+  <span class="section-label">My Work</span>
+  <h1 class="portfolio-title">Proven <span>AI Automation</span> Projects</h1>
+  <p class="portfolio-desc">Every project below is real, live and working — not concepts or mockups. Built with n8n, Make.com, Zapier and OpenAI to solve actual business problems.</p>
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterProjects('all', this)">All Projects</button>
+    <button class="filter-tab" onclick="filterProjects('n8n', this)">n8n</button>
+    <button class="filter-tab" onclick="filterProjects('make', this)">Make.com</button>
+    <button class="filter-tab" onclick="filterProjects('zapier', this)">Zapier</button>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-num">8+</span><span class="stat-label">Projects Built</span></div>
+  <div class="stat-item"><span class="stat-num">6+</span><span class="stat-label">Industries</span></div>
+  <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">Live & Tested</span></div>
+  <div class="stat-item"><span class="stat-num">24/7</span><span class="stat-label">Running Systems</span></div>
+</div>
+
+<!-- PROJECTS -->
+<div class="portfolio-section">
+  <div class="portfolio-grid" id="projectGrid">
+
+    <div class="project-card" data-category="n8n">
+      <div class="project-thumb thumb-n8n">🏠
+        <span class="project-thumb-label">n8n</span>
+      </div>
+      <div class="project-body">
+        <h3 class="project-title">Real Estate AI Agent</h3>
+        <p class="project-desc">A fully automated real estate lead management system that captures, qualifies and follows up with potential buyers 24/7 without any human involvement.</p>
+        <ul class="project-features">
+          <li>Instant response to every property inquiry</li>
+          <li>AI qualification of prospects automatically</li>
+          <li>Automatic follow-ups via WhatsApp and email</li>
+          <li>Complete lead logging to Google Sheets</li>
+        </ul>
+        <div class="project-tools">
+          <span class="tool-tag">n8n</span>
+          <span class="tool-tag">OpenAI GPT-4</span>
+          <span class="tool-tag">Google Sheets</span>
+          <span class="tool-tag">WhatsApp API</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-category="n8n">
+      <div class="project-thumb thumb-n8n">🍔
+        <span class="project-thumb-label">n8n</span>
+      </div>
+      <div class="project-body">
+        <h3 class="project-title">WhatsApp Restaurant Ordering Bot</h3>
+        <p class="project-desc">Complete restaurant automation — customers send orders via WhatsApp, AI processes them, reads the menu, logs orders and sends confirmations automatically.</p>
+        <ul class="project-features">
+          <li>Natural language order processing via WhatsApp</li>
+          <li>Dynamic menu reading from Google Sheets</li>
+          <li>Automatic order confirmation and tracking</li>
+          <li>Complete order history and reporting</li>
+        </ul>
+        <div class="project-tools">
+          <span class="tool-tag">n8n</span>
+          <span class="tool-tag">WhatsApp API</span>
+          <span class="tool-tag">OpenAI</span>
+          <span class="tool-tag">Google Sheets</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-category="make">
+      <div class="project-thumb thumb-make">📱
+        <span class="project-thumb-label">Make.com</span>
+      </div>
+      <div class="project-body">
+        <h3 class="project-title">Social Media Auto-Post Engine</h3>
+        <p class="project-desc">AI-powered content generation and automatic publishing system for Facebook, Instagram and LinkedIn — your social media runs completely on autopilot.</p>
+        <ul class="project-features">
+          <li>AI generates brand-specific content automatically</li>
+          <li>Posts to Facebook, Instagram and LinkedIn daily</li>
+          <li>Content scheduling and calendar management</li>
+          <li>Performance tracking in Google Sheets dashboard</li>
+        </ul>
+        <div class="project-tools">
+          <span class="tool-tag">Make.com</span>
+          <span class="tool-tag">OpenAI</span>
+          <span class="tool-tag">Facebook API</span>
+          <span class="tool-tag">Instagram API</span>
+          <span class="tool-tag">LinkedIn API</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-category="zapier">
+      <div class="project-thumb thumb-zapier">🎧
+        <span class="project-thumb-label">Zapier</span>
+      </div>
+      <div class="project-body">
+        <h3 class="project-title">AI Customer Support Chatbot</h3>
+        <p class="project-desc">Intelligent customer support automation that answers questions, collects information, sends follow-ups and escalates complex issues to human agents when needed.</p>
+        <ul class="project-features">
+          <li>Instant AI response to every customer message</li>
+          <li>Trained on business-specific information</li>
+          <li>Smart escalation to human support when needed</li>
+          <li>CRM integration for customer data management</li>
+        </ul>
+        <div class="project-tools">
+          <span class="tool-tag">Zapier</span>
+          <span class="tool-tag">OpenAI</span>
+          <span class="tool-tag">CRM</span>
+          <span class="tool-tag">Email</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-category="n8n">
+      <div class="project-thumb thumb-n8n">🌐
+        <span class="project-thumb-label">n8n</span>
+      </div>
+      <div class="project-body">
+        <h3 class="project-title">Website AI Chatbot Agent</h3>
+        <p class="project-desc">Intelligent website chatbot with memory — answers visitor questions, qualifies leads and captures contact information for any business website.</p>
+        <ul class="project-features">
+          <li>Contextual conversation memory per session</li>
+          <li>Answers questions based on your website content</li>
+          <li>Lead capture and CRM integration</li>
+          <li>Multi-language support via OpenAI</li>
+        </ul>
+        <div class="project-tools">
+          <span class="tool-tag">n8n</span>
+          <span class="tool-tag">OpenAI</span>
+          <span class="tool-tag">Webhooks</span>
+          <span class="tool-tag">Google Sheets</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-category="make">
+      <div class="project-thumb thumb-make">📧
+        <span class="project-thumb-label">Make.com</span>
+      </div>
+      <div class="project-body">
+        <h3 class="project-title">Email Automation & Summarizer</h3>
+        <p class="project-desc">Automated email management system that reads, categorizes, summarizes and responds to emails using AI — saving hours of inbox management every day.</p>
+        <ul class="project-features">
+          <li>Automatic email reading and categorization</li>
+          <li>AI-powered email summarization</li>
+          <li>Smart auto-reply for common inquiries</li>
+          <li>Priority flagging for urgent messages</li>
+        </ul>
+        <div class="project-tools">
+          <span class="tool-tag">Make.com</span>
+          <span class="tool-tag">OpenAI</span>
+          <span class="tool-tag">Gmail API</span>
+          <span class="tool-tag">Google Sheets</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-category="n8n">
+      <div class="project-thumb thumb-n8n">📰
+        <span class="project-thumb-label">n8n</span>
+      </div>
+      <div class="project-body">
+        <h3 class="project-title">Auto Blog Generator</h3>
+        <p class="project-desc">Fully automated blog content creation system — AI researches topics, writes complete articles and publishes them to your website automatically on schedule.</p>
+        <ul class="project-features">
+          <li>AI topic research and content planning</li>
+          <li>Complete SEO-optimized article generation</li>
+          <li>Automatic publishing to WordPress or any CMS</li>
+          <li>Scheduled posting with content calendar</li>
+        </ul>
+        <div class="project-tools">
+          <span class="tool-tag">n8n</span>
+          <span class="tool-tag">OpenAI</span>
+          <span class="tool-tag">WordPress</span>
+          <span class="tool-tag">RSS Feed</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" data-category="n8n">
+      <div class="project-thumb thumb-openai">💬
+        <span class="project-thumb-label">n8n + AI</span>
+      </div>
+      <div class="project-body">
+        <h3 class="project-title">Chat With News AI Agent</h3>
+        <p class="project-desc">An intelligent AI agent that fetches latest news, summarizes articles and answers questions about current events — fully automated and updated in real time.</p>
+        <ul class="project-features">
+          <li>Real-time news fetching and processing</li>
+          <li>AI-powered article summarization</li>
+          <li>Natural language Q&A about news topics</li>
+          <li>Custom topic filtering and preferences</li>
+        </ul>
+        <div class="project-tools">
+          <span class="tool-tag">n8n</span>
+          <span class="tool-tag">OpenAI</span>
+          <span class="tool-tag">News API</span>
+          <span class="tool-tag">Webhooks</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="portfolio-cta">
+  <h2 class="cta-title">Need a <span>Custom Automation</span>?</h2>
+  <p class="cta-desc">Tell me your business problem — I will build a solution that works.</p>
+  <a href="https://www.fiverr.com/hameed_rahi" target="_blank" class="btn-primary">🚀 Hire Me on Fiverr →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">RAV<span>IX</span></div>
+  <p class="footer-copy">© 2026 RAVIX — Hameed Rahi | Your Problem. Our Intelligence.</p>
+</footer>
+
+<script>
+  function filterProjects(category, btn) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.project-card').forEach(card => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.style.display = 'block';
+        card.style.animation = 'fadeIn .4s ease';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.project-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
